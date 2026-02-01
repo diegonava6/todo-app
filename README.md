@@ -2,6 +2,8 @@
 
 Simple, elegant todo app built with React + Vite.
 
+**Live Demo:** https://todo-app-ryu.netlify.app
+
 ## Features
 
 - ✅ Add todos
