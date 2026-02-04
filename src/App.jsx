@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import './App.css'
+import { useAuth } from './context/AuthContext.jsx'
+import { tokenManager } from './utils/tokenManager.js'
 
 function App() {
+  const { isAuthenticated, user, login, logout, loading } = useAuth()
   const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
   const [editId, setEditId] = useState(null)
   const [editText, setEditText] = useState('')
+  const [tokenInput, setTokenInput] = useState('')
+  const [showTokenSetup, setShowTokenSetup] = useState(!isAuthenticated)
 
   const addTodo = () => {
     if (input.trim() === '') return
@@ -42,10 +47,62 @@ function App() {
     setEditText('')
   }
 
+  const handleTokenSetup = () => {
+    if (tokenInput.trim() === '') return
+    const success = login(tokenInput, { tokenSetup: true, createdAt: new Date().toISOString() })
+    if (success) {
+      setTokenInput('')
+      setShowTokenSetup(false)
+    }
+  }
+
+  const handleLogout = () => {
+    logout()
+    setShowTokenSetup(true)
+    setTodos([])
+  }
+
+  if (loading) {
+    return (
+      <div className="app">
+        <div className="loading">Loading authentication...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="app">
-      <h1>🦾 Todo App</h1>
-      
+      <div className="app-header">
+        <h1>🦾 Todo App</h1>
+        {isAuthenticated && (
+          <div className="auth-status">
+            <span className="status-badge">✓ Authenticated</span>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+      </div>
+
+      {showTokenSetup && (
+        <div className="token-setup">
+          <div className="token-setup-card">
+            <h2>🔐 Token Setup</h2>
+            <p>Enter your API token to get started:</p>
+            <input
+              type="password"
+              value={tokenInput}
+              onChange={(e) => setTokenInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleTokenSetup()}
+              placeholder="Enter your token..."
+              className="token-input"
+            />
+            <button onClick={handleTokenSetup} className="token-submit-btn">Setup Token</button>
+            <p className="token-hint">Your token is stored securely in local storage.</p>
+          </div>
+        </div>
+      )}
+
+      {isAuthenticated && (
+        <>
       <div className="input-section">
         <input
           type="text"
@@ -94,6 +151,8 @@ function App() {
         <div className="stats">
           {todos.filter(t => !t.done).length} remaining · {todos.filter(t => t.done).length} completed
         </div>
+      )}
+        </>
       )}
     </div>
   )

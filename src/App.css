@@ -191,3 +191,123 @@ body {
   min-height: 100vh;
   padding: 20px;
 }
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.auth-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #4CAF50;
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #da190b;
+}
+
+.token-setup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.token-setup-card {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.token-setup-card h2 {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.token-setup-card p {
+  color: #666;
+  text-align: center;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.token-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin: 20px 0;
+  transition: border-color 0.2s;
+}
+
+.token-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.token-submit-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.token-submit-btn:hover {
+  background: #45a049;
+}
+
+.token-hint {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: white;
+  font-size: 18px;
+}
